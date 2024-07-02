@@ -18,3 +18,9 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+# Lock files
+composer.lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
