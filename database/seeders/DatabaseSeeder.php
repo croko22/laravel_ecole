@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
+use App\Models\User;
 use App\Models\Course;
 use App\Models\Student;
-use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,12 +19,24 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
+        $teacherRole = Role::create(['name' => 'teacher']);
+        $adminRole = Role::create(['name' => 'admin']);
+        $adminRole->givePermissionTo(Permission::all());
 
-        User::factory()->create([
+        $adminUser = User::factory()->create([
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+        ]);
+        $adminUser->assignRole($adminRole);
+
+        $teacherUser = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+        $teacherUser->assignRole($teacherRole);
 
+
+        $students = Student::factory(10)->create();
         $courses = Course::factory()->createMany(
             [
                 ['name' => 'Course 1', 'description' => 'Description 1'],
@@ -29,7 +44,6 @@ class DatabaseSeeder extends Seeder
                 ['name' => 'Course 3', 'description' => 'Description 3'],
             ]
         );
-        $students = Student::factory(10)->create();
 
         // Iterate over each course and attach users
         $courses->each(function ($course) use ($students) {
