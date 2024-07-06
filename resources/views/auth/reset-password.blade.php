@@ -1,16 +1,8 @@
 <x-layout>
-    <h1>LARA MOVIES</h1>
 
-    {{-- @if (session('success'))
-        <x-toast />
-    @endif
+    <h1>Reset your password</h1>
 
-    @if (session('error'))
-        <x-error />
-    @endif --}}
-
-    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Login</h2>
-    <form class="max-w-sm mx-auto" action={{ route('login') }} method="POST">
+    <form class="max-w-sm mx-auto" action="{{ route('password.update', ['token' => $token]) }}" method="POST">
         @csrf
         <div class="mb-5">
             <label for="email" class="label">Your email</label>
@@ -21,15 +13,20 @@
             @enderror
         </div>
         <div class="mb-5">
-            <label for="password" class="label">Your
-                password</label>
+            <label for="password" class="label">Your new password</label>
             <input type="password" id="password" name="password" class="input" required />
             @error('password')
                 <span class="text-red-500">{{ $message }}</span>
             @enderror
         </div>
+        <div class="mb-5">
+            <label for="password_confirmation" class="label">Confirm your new password</label>
+            <input type="password" id="password_confirmation" name="password_confirmation" class="input" required />
+            @error('password_confirmation')
+                <span class="text-red-500">{{ $message }}</span>
+            @enderror
+        </div>
+
         <button type="submit" class="submit">Submit</button>
     </form>
-
-    <a href={{ route('register') }} class="link">Register</a>
 </x-layout>
