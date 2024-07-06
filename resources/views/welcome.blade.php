@@ -1,16 +1,13 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    @vite(['resources/scss/app.scss', 'resources/js/app.js'])
-    <title>Laravel</title>
-</head>
-
-<body>
-    <h1>bs</h1>
-    bs
-</body>
-
-</html>
+<x-layout>
+    <h1 class="text-red-400">bs idk why tailwind doesnt works at all</h1>
+    @auth
+        <p>Welcome, {{ Auth::user()->name }}!</p>
+        <p>Your role(s):
+            @foreach (Auth::user()->roles as $role)
+                <span>{{ $role->name }}</span>
+            @endforeach
+        </p>
+    @else
+        <p>Welcome, guest!</p>
+    @endauth
+</x-layout>
