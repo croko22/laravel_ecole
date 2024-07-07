@@ -19,8 +19,8 @@ class Course extends Model
         return $this->belongsToMany(Student::class)->count();
     }
 
-    // public function teacher()
-    // {
-    //     return $this->belongsTo(User::class);
-    // }
+    public function teachers()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }
