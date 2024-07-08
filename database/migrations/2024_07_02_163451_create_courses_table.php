@@ -14,7 +14,6 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('description');
-            // $table->foreignIdFor(\App\Models\Teacher::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

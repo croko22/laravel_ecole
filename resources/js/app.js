@@ -1,8 +1,9 @@
-import './bootstrap';
+import "./bootstrap";
 
-import Alpine from 'alpinejs'
+import Alpine from "alpinejs";
+import "flowbite";
 
-Alpine.start()
+Alpine.start();
 
 // If you want Alpine's instance to be available everywhere.
-window.Alpine = Alpine
+window.Alpine = Alpine;
