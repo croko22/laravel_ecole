@@ -1,16 +1,17 @@
-<x-layout>
-    <h1>LARA MOVIES</h1>
+<x-guest-layout>
+    @if (session('error'))
+        <div class="absolute top-10 left-10 ">
+            <x-error />
+        </div>
+    @endif
 
     {{-- @if (session('success'))
         <x-toast />
     @endif
+    --}}
 
-    @if (session('error'))
-        <x-error />
-    @endif --}}
-
-    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Login</h2>
-    <form class="max-w-sm mx-auto" action={{ route('login') }} method="POST">
+    <h2 class="text-2xl font-semibold text-center text-gray-900 dark:text-white">Login</h2>
+    <form class="flex flex-col max-w-sm gap-5 mx-auto" action={{ route('login') }} method="POST">
         @csrf
         <div class="mb-5">
             <label for="email" class="label">Your email</label>
@@ -32,4 +33,4 @@
         <button type="submit" class="submit">Submit</button>
     </form>
 
-</x-layout>
+</x-guest-layout>

@@ -1,4 +1,4 @@
-<div class="container" <h2>Course Management</h2>
+<div class="container">
     {{-- //TODO: Consider using modals --}}
     <div id="accordion-collapse" data-accordion="collapse">
         <h2 id="accordion-collapse-heading-1">
