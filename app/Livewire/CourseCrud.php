@@ -15,7 +15,7 @@ class CourseCrud extends Component
     public function render()
     {
         return view('livewire.course-crud', [
-            'courses' => Course::orderBy('created_at', 'desc')->paginate(10),
+            'courses' => Course::orderBy('created_at', 'desc')->paginate(9),
         ]);
     }
 

@@ -1,5 +1,4 @@
-<div>
-    <h2>Course Management</h2>
+<div class="container" <h2>Course Management</h2>
     {{-- //TODO: Consider using modals --}}
     <div id="accordion-collapse" data-accordion="collapse">
         <h2 id="accordion-collapse-heading-1">
@@ -38,18 +37,15 @@
                 <button type="submit" class="submit">Add Course</button>
             </form>
         </div>
-
     </div>
 
-    <section class="text-gray-600 body-font">
-        <div class="container px-5 py-24 mx-auto">
-            <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5">
-                @forelse ($courses as $course)
-                    <x-course-card :course="$course" />
-                @empty
-                    <p>No available courses</p>
-                @endforelse
-            </div>
+    <section class="mt-5 text-gray-600 body-font">
+        <div class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+            @forelse ($courses as $course)
+                <x-course-card :course="$course" />
+            @empty
+                <p>No available courses</p>
+            @endforelse
         </div>
 
         {{ $courses->links() }}
