@@ -83,7 +83,7 @@
                     class="flex flex-col mt-5 gap-y-4 gap-x-0 md:flex-row md:justify-center md:items-center md:gap-y-0 md:gap-x-7 md:mt-0">
                     <div>
                         <a class="relative inline-block text-black before:absolute before:bottom-0.5 before:start-0 before:-z-[1] before:w-full before:h-1 before:bg-lime-400 dark:text-white"
-                            href={{ route('course.index') }} aria-current="page">Courses</a>
+                            href={{ route('course') }} aria-current="page">Courses</a>
                     </div>
                     <div>
                         <a class="inline-block text-black hover:text-gray-600 dark:text-white dark:hover:text-neutral-300"
