@@ -1,19 +1,20 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\AuthController;
+use App\Livewire\CourseCrud;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
 
 Route::middleware(['auth'])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/course', CourseCrud::class)->name('course');
+    // Route::resource('course', CourseController::class);
 });
 
 Route::middleware(['guest'])->group(function () {
+    Route::view('/', 'welcome')->name('home');
+
     Route::view('/login', 'auth.login')->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
 
@@ -25,5 +26,3 @@ Route::middleware(['guest'])->group(function () {
     })->name('password.reset');
     Route::post('/reset-password', [AuthController::class, 'updatePassword'])->middleware('guest')->name('password.update');
 });
-
-Route::resource('course', CourseController::class);
