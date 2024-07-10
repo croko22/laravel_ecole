@@ -82,16 +82,16 @@
                 <div
                     class="flex flex-col mt-5 gap-y-4 gap-x-0 md:flex-row md:justify-center md:items-center md:gap-y-0 md:gap-x-7 md:mt-0">
                     <div>
-                        <a class="relative inline-block text-black before:absolute before:bottom-0.5 before:start-0 before:-z-[1] before:w-full before:h-1 before:bg-lime-400 dark:text-white"
+                        <a class="relative inline-block text-black dark:text-white {{ request()->routeIs('course') ? 'before:absolute before:bottom-0.5 before:start-0 before:-z-[1] before:w-full before:h-1 before:bg-lime-400' : '' }}"
                             href={{ route('course') }} aria-current="page">Courses</a>
                     </div>
                     <div>
-                        <a class="inline-block text-black hover:text-gray-600 dark:text-white dark:hover:text-neutral-300"
-                            href="#">Students</a>
+                        <a class="relative inline-block text-black dark:text-white {{ request()->routeIs('student') ? 'before:absolute before:bottom-0.5 before:start-0 before:-z-[1] before:w-full before:h-1 before:bg-lime-400' : '' }}"
+                            href={{ route('student') }}>Students</a>
                     </div>
                     <div>
-                        <a class="inline-block text-black hover:text-gray-600 dark:text-white dark:hover:text-neutral-300"
-                            href="#">Teachers</a>
+                        <a class="relative inline-block text-black dark:text-white {{ request()->routeIs('teacher') ? 'before:absolute before:bottom-0.5 before:start-0 before:-z-[1] before:w-full before:h-1 before:bg-lime-400' : '' }}"
+                            href={{ route('teacher') }}>Teachers</a>
                     </div>
                 </div>
             @endauth
