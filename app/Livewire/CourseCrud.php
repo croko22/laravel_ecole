@@ -36,6 +36,7 @@ class CourseCrud extends Component
         ]);
 
         $this->reset();
+        $this->dispatch('course-created', ['message' => 'Course created successfully!']);
         $this->courses = Course::all()->sortByDesc('created_at');
     }
 
@@ -60,13 +61,15 @@ class CourseCrud extends Component
             'description' => $this->description,
         ]);
 
-        $this->selectedCourseId = null; // Clear selection after update
-        $this->courses = Course::all(); // Refresh course list after update
+        $this->selectedCourseId = null;
+        $this->courses = Course::all();
     }
 
     public function deleteCourse(int $courseId)
     {
         Course::find($courseId)->delete();
-        $this->courses = Course::all(); // Refresh course list after deletion
+        $this->dispatch('course-deleted', ['message' => 'Course deleted successfully!'])->self();
+
+        $this->courses = Course::all();
     }
 }
