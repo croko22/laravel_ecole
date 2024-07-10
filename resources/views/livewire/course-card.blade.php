@@ -9,14 +9,15 @@
 
         <div class="course-card__view-link">
             {{-- MODAL --}}
-            <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="submit" type="button">
+            <button data-modal-target="modal-{{ $course->id }}" data-modal-toggle="modal-{{ $course->id }}"
+                class="submit" type="button">
                 View Course
             </button>
         </div>
 
 
         <!-- Main modal -->
-        <div id="default-modal" tabindex="-1" aria-hidden="true"
+        <div id="modal-{{ $course->id }}" tabindex="-1" aria-hidden="true"
             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative w-full max-w-2xl max-h-full p-4">
                 <!-- Modal content -->
@@ -28,7 +29,7 @@
                         </h3>
                         <button type="button"
                             class="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 ms-auto dark:hover:bg-gray-600 dark:hover:text-white"
-                            data-modal-hide="default-modal">
+                            data-modal-hide="modal-{{ $course->id }}">
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 14 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -43,29 +44,37 @@
                             {{ $course->description }}
                         </p>
                         {{-- TEACHER --}}
-                        <h3>Teachers</h3>
-                        @forelse ($course->teachers as $teachers)
-                            <p>{{ $teachers->name }}, {{ $teachers->lastname }}</p>
-                        @empty
-                            <p>No teachers</p>
-                        @endforelse
+                        <h3 class="mb-2 text-lg font-semibold">Teachers</h3>
+                        <ul class="pl-5 list-disc">
+                            @forelse ($course->teachers as $teacher)
+                                <li class="text-sm text-gray-700">{{ $teacher->name }}</li>
+                            @empty
+                                <li class="text-sm text-gray-700">No teachers</li>
+                            @endforelse
+                        </ul>
 
                         {{-- STUDENTS --}}
-                        <h3>Students</h3>
-                        @forelse ($course->students as $student)
-                            <p>{{ $student->name }}, {{ $student->lastname }}</p>
-                        @empty
-                            <p>No students</p>
-                        @endforelse
+                        <h3 class="mb-2 text-lg font-semibold">Students</h3>
+                        <ul class="pl-5 list-disc">
+                            @forelse ($course->students->take(10) as $index => $student)
+                                <li class="text-sm text-gray-700">{{ $student->name }}, {{ $student->lastname }}</li>
+                                @if ($index === 9 && $course->students->count() > 10)
+                                    <li class="text-sm text-gray-700">...</li>
+                                @endif
+                            @empty
+                                <li class="text-sm text-gray-700">No students</li>
+                            @endforelse
+                        </ul>
                     </div>
 
 
                     <!-- Modal footer -->
                     <div class="flex items-center p-4 border-t border-gray-200 rounded-b md:p-5 dark:border-gray-600">
-                        <button data-modal-hide="default-modal" type="button"
+                        <button data-modal-hide="modal-{{ $course->id }}" type="button"
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
-                        <button data-modal-hide="default-modal" type="button"
-                            wire:click="deleteCourse({{ $course->id }})"
+                        <button data-modal-hide="modal-{{ $course->id }}" type="button"
+                            wire:click="$parent.deleteCourse({{ $course->id }})"
+                            wire:confirm="Are you sure you want to delete this course?"
                             class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-red-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Delete</button>
                     </div>
                 </div>
