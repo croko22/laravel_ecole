@@ -7,22 +7,31 @@ use Livewire\WithPagination;
 use Livewire\Component;
 use App\Models\Course;
 
+#[Layout('components.layouts.app')]
 class CourseCrud extends Component
 {
     use WithPagination;
 
-    #[Layout('components.layouts.app')]
-    public function render()
+    public string $name;
+    public string $description;
+    public string $query = '';
+
+    public function search()
     {
-        return view('livewire.course-crud', [
-            'courses' => Course::orderBy('created_at', 'desc')->paginate(9),
-        ]);
+        $this->resetPage();
     }
 
-    public $name;
-    public $description;
-    public $selectedCourseId;
+    public function render()
+    {
+        $searchTerm = '%' . $this->query . '%';
+        $courses = Course::where('name', 'like', $searchTerm)->orWhere('description', 'like', $searchTerm)
+            ->orderBy('created_at', 'desc')
+            ->paginate(9);
 
+        return view('livewire.course-crud', [
+            'courses' => $courses
+        ]);
+    }
     public function createCourse()
     {
         $this->validate([
@@ -37,39 +46,14 @@ class CourseCrud extends Component
 
         $this->reset();
         $this->dispatch('course-created', ['message' => 'Course created successfully!']);
-        $this->courses = Course::all()->sortByDesc('created_at');
-    }
-
-    public function editCourse(int $courseId)
-    {
-        $this->selectedCourseId = $courseId;
-        $course = Course::find($courseId);
-        $this->name = $course->name;
-        $this->description = $course->description;
-    }
-
-    public function updateCourse()
-    {
-        $this->validate([
-            'name' => 'required|string',
-            'description' => 'required|string',
-        ]);
-
-        $course = Course::find($this->selectedCourseId);
-        $course->update([
-            'name' => $this->name,
-            'description' => $this->description,
-        ]);
-
-        $this->selectedCourseId = null;
-        $this->courses = Course::all();
+        // $this->courses = Course::all()->sortByDesc('created_at');
+        $this->resetPage();
     }
 
     public function deleteCourse(int $courseId)
     {
         Course::find($courseId)->delete();
         $this->dispatch('course-deleted', ['message' => 'Course deleted successfully!'])->self();
-
-        $this->courses = Course::all();
+        // $this->courses = Course::all();
     }
 }
