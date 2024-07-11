@@ -30,7 +30,7 @@
             @enderror
         </div>
         <a href={{ route('password.request') }} class="link">Forgot your password?</a>
-        <button type="submit" class="submit">Submit</button>
+        <button type="submit" class="button-primary">Submit</button>
     </form>
 
 </x-guest-layout>

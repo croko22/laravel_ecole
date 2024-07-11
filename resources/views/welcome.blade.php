@@ -1,6 +1,6 @@
-<x-guest-layout>
+<x-layout>
     <!-- Hero -->
-    <div class="relative overflow-hidden">
+    <div class="relative">
         <!-- Gradients -->
         <div aria-hidden="true" class="absolute flex transform -translate-x-1/2 -top-96 start-1/2">
             <div
@@ -49,4 +49,4 @@
         </div>
     </div>
     <!-- End Hero -->
-</x-guest-layout>
+</x-layout>

@@ -12,6 +12,6 @@
                 <span class="text-red-500">{{ $message }}</span>
             @enderror
         </div>
-        <button type="submit" class="submit">Submit</button>
+        <button type="submit" class="button-primary">Submit</button>
     </form>
 </x-layout>

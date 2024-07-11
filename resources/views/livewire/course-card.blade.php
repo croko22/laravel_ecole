@@ -10,7 +10,7 @@
         <div class="course-card__view-link">
             {{-- MODAL --}}
             <button data-modal-target="modal-{{ $course->id }}" data-modal-toggle="modal-{{ $course->id }}"
-                class="submit" type="button">
+                class="button-primary" type="button">
                 View Course
             </button>
         </div>
@@ -70,8 +70,8 @@
 
                     <!-- Modal footer -->
                     <div class="flex items-center p-4 border-t border-gray-200 rounded-b md:p-5 dark:border-gray-600">
-                        <button data-modal-hide="modal-{{ $course->id }}" type="button"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
+                        <a data-modal-hide="modal-{{ $course->id }}" href="{{ route('course.show', $course) }}"
+                            class="button-primary">Edit</a>
                         <button data-modal-hide="modal-{{ $course->id }}" type="button"
                             wire:click="$parent.deleteCourse({{ $course->id }})"
                             wire:confirm="Are you sure you want to delete this course?"

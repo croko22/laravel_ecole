@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         ]);
         $teacherUser->assignRole($teacherRole);
 
-        $students = Student::factory(10)->create();
+        $students = Student::factory(30)->create();
         $courses = Course::factory()->createMany(
             [
                 ['name' => 'Course 1', 'description' => 'Description 1'],
@@ -51,10 +51,11 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Iterate over each course and attach users
         $courses->each(function ($course) use ($students) {
+            $randomNumberOfStudents = rand(1, $students->count());
+
             $course->students()->attach(
-                $students->random(5)->pluck('id')->toArray()
+                $students->random($randomNumberOfStudents)->pluck('id')->toArray()
             );
             $course->teachers()->attach(
                 User::role('teacher')->get()->random()->id
