@@ -3,13 +3,18 @@
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\AuthController;
 use App\Livewire\CourseCrud;
+use App\Livewire\StudentTable;
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::view('/dashboard', 'dashboard')->name('dashboard');
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/dashboard', [CourseController::class, 'index'])->name('dashboard');
+
     Route::get('/course', CourseCrud::class)->name('course');
-    // Route::resource('course', CourseController::class);
+    Route::get('/course/{course}', [CourseController::class, 'show'])->name('course.show');
+    Route::get('/student', StudentTable::class)->name('student');
+    Route::get('/teacher', StudentTable::class)->name('teacher');
+
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::middleware(['guest'])->group(function () {
