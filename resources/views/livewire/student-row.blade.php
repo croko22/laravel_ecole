@@ -2,8 +2,7 @@
     <td class="size-px whitespace-nowrap">
         <div class="py-3 ps-6">
             <label for="hs-at-with-checkboxes-1" class="flex">
-                <input type="checkbox" wire:model="$parent.selectedRows" value="{{ $student->id }}"
-                    class="text-blue-600 border-gray-300 rounded shrink-0 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+                <input type="checkbox" wire:model="$parent.selectedRows" value="{{ $student->id }}" class="input-checkbox"
                     id="hs-at-with-checkboxes-1">
                 <span class="sr-only">Checkbox</span>
             </label>
@@ -13,7 +12,7 @@
         <div class="py-3 ps-6 lg:ps-3 xl:ps-0 pe-6">
             <div class="flex items-center gap-x-3">
                 <img class="inline-block size-[38px] rounded-full"
-                    src="https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+                    src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
                     alt="Image Description">
                 <div class="grow">
                     <span
@@ -57,12 +56,10 @@
             </span>
         </div>
     </td>
+
     <td class="size-px whitespace-nowrap">
         <div class="px-6 py-1.5">
-            <a class="inline-flex items-center text-sm font-medium text-blue-600 gap-x-1 decoration-2 hover:underline dark:text-blue-500"
-                href="#">
-                Edit
-            </a>
+            <livewire:modals.edit-student :student="$student" />
         </div>
     </td>
 </tr>
