@@ -4,36 +4,31 @@ namespace Database\Seeders;
 
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\PermissionRegistrar;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Student;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
         $teacherRole = Role::create(['name' => 'teacher']);
+        $teacherRole->givePermissionTo('take attendance');
+
         $adminRole = Role::create(['name' => 'admin']);
         $adminRole->givePermissionTo(Permission::all());
 
         $adminUser = User::factory()->create([
             'name' => 'Admin User',
-            'email' => 'admin@example.com',
+            'email' => 'test@example.com',
         ]);
         $adminUser->assignRole($adminRole);
 
-        $teacherUser = User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
-        $teacherUser->assignRole($teacherRole);
+        $teachers = User::factory(10)->create();
+        $teachers->each(function ($teacher) use ($teacherRole) {
+            $teacher->assignRole($teacherRole);
+        });
 
         $students = Student::factory(30)->create();
         $courses = Course::factory()->createMany(
