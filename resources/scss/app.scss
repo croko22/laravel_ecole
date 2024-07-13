@@ -16,13 +16,24 @@ h1 {
 .input {
     @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
 }
+.input-checkbox {
+    @apply text-blue-600 border-gray-300 rounded shrink-0 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800;
+}
 
 .label {
     @apply block mb-2 text-sm font-medium text-gray-900 dark:text-white;
 }
 
 .button-primary {
-    @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800;
+    @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800;
+}
+
+.button-danger {
+    @apply flex flex-row items-center justify-center gap-2 px-5 py-3 text-sm font-medium text-white bg-red-700 rounded-lg focus:outline-none hover:bg-red-800 focus:ring-4 focus:ring-red-300 me-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900;
+}
+
+.button-auth {
+    @apply inline-flex items-center px-3 py-2 text-sm font-medium text-black transition border border-transparent gap-x-2 rounded-xl bg-lime-400 hover:bg-lime-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-lime-500;
 }
 
 .pill {
@@ -31,6 +42,14 @@ h1 {
 
 .invalid-feedback {
     @apply text-red-500;
+}
+
+//* NAVIGATION
+.nav-link {
+    @apply relative inline-block text-black dark:text-white;
+    &.active {
+        @apply before:absolute before:bottom-0.5 before:start-0 before:-z-[1] before:w-full before:h-1 before:bg-lime-400;
+    }
 }
 
 //* GRADIENT
