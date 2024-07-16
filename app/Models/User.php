@@ -47,19 +47,8 @@ class User extends Authenticatable implements CanResetPassword
         ];
     }
 
-    public function isAdmin(): bool
-    {
-        return $this->hasRole('admin');
-    }
-
-    public function teachers()
-    {
-        return User::role('teacher')->get();
-    }
-
     public function courses()
     {
         return $this->belongsToMany(Course::class);
     }
-
 }
