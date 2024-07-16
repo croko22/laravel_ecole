@@ -33,7 +33,7 @@
                                     Delete selected
                                 </button>
 
-                                <livewire:modals.create-student />
+                                <livewire:modals.create-teacher />
                             </div>
                         </div>
                     </div>

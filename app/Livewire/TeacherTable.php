@@ -16,7 +16,7 @@ class TeacherTable extends Component
     public $selectedRows = [];
 
     public $name;
-    public $lastname;
+    public $email;
 
     public function search()
     {
@@ -54,10 +54,12 @@ class TeacherTable extends Component
             'email' => 'required | email',
         ]);
 
-        User::create([
+        $teacher = User::create([
             'name' => $this->name,
             'email' => $this->email,
+            'password' => bcrypt('password'),
         ]);
+        $teacher->assignRole('teacher');
 
         $this->reset();
         $this->dispatch('user-added', ['message' => 'Teacher added successfully!']);
