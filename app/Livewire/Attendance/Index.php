@@ -7,22 +7,28 @@ use Livewire\Component;
 class Index extends Component
 {
     public $course;
-    public $attendance = [];
+    public $lessons;
+    public $date = null;
 
-    public function mount()
+    public function mount($course)
     {
-        // $this->attendance = auth()->user()->courses->map(function ($course) {
-        //     return [
-        //         'course' => $course,
-        //         'attendance' => $course->attendance->groupBy('date')
-        //     ];
-        // });
+        $this->course = $course;
+        $this->lessons = $course->lessons;
     }
 
     public function render()
     {
         return view('livewire.attendance.index', [
-            // 'attendance' => $this->attendance
+            'lessons' => $this->lessons,
         ]);
+    }
+
+    public function createLesson()
+    {
+        $this->course->lessons()->create([
+            'date' => now(),
+        ]);
+
+        $this->dispatch('lesson-created', ['message' => 'Lesson created successfully!']);
     }
 }
