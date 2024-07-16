@@ -47,6 +47,11 @@ class User extends Authenticatable implements CanResetPassword
         ];
     }
 
+    public static function teachers()
+    {
+        return self::role('teacher');
+    }
+
     public function courses()
     {
         return $this->belongsToMany(Course::class);
