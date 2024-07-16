@@ -22,8 +22,8 @@ class Show extends Component
         $this->course = $course;
         $this->name = $course->name;
         $this->description = $course->description;
-        $this->teachers = User::teachers()->get();
-        $this->selectedTeacher = $this->course->teachers->first()->id;
+        $this->teachers = User::teachers()->get() ?? [];
+        $this->selectedTeacher = $this->course->teachers->first()->id ?? null;
         $this->students = Student::all();
     }
 
