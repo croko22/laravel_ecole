@@ -14,7 +14,6 @@
                 View Course
             </button>
         </div>
-
         <!-- Main modal -->
         <div id="modal-{{ $course->id }}" tabindex="-1" aria-hidden="true"
             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -26,9 +25,7 @@
                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                             {{ $course->name }}
                         </h3>
-                        <button type="button"
-                            class="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 ms-auto dark:hover:bg-gray-600 dark:hover:text-white"
-                            data-modal-hide="modal-{{ $course->id }}">
+                        <button type="button" class="button-close" data-modal-hide="modal-{{ $course->id }}">
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 14 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -72,11 +69,11 @@
                         @can('edit course')
                             <a data-modal-hide="modal-{{ $course->id }}" href="{{ route('course.show', $course) }}"
                                 class="button-primary">Edit</a>
+                            <button data-modal-hide="modal-{{ $course->id }}" type="button"
+                                wire:click="$parent.deleteCourse({{ $course->id }})"
+                                wire:confirm="Are you sure you want to delete this course?"
+                                class="ml-2 button-danger">Delete</button>
                         @endcan
-                        <button data-modal-hide="modal-{{ $course->id }}" type="button"
-                            wire:click="$parent.deleteCourse({{ $course->id }})"
-                            wire:confirm="Are you sure you want to delete this course?"
-                            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-red-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Delete</button>
                         @can('take attendance')
                             <a data-modal-hide="modal-{{ $course->id }}" href="{{ route('course.show', $course) }}"
                                 class="button-primary">View course</a>
@@ -85,6 +82,7 @@
                 </div>
             </div>
         </div>
+
 
         <div class="course-card__stats">
             <span class="course-card__stats-icon">

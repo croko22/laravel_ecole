@@ -27,23 +27,19 @@ class CourseCrud extends Component
         $searchTerm = '%' . $this->query . '%';
         $user = User::find(auth()->user()->id);
 
-        // if ($user->hasRole('admin')) {
-        //     $courses = Course::where('name', 'like', $searchTerm)->orWhere('description', 'like', $searchTerm)
-        //         ->orderBy('created_at', 'desc')
-        //         ->paginate(9);
-        // } else if ($user->hasRole('teacher')) {
-        //     $courses = $user->courses()
-        //         ->where(function ($query) use ($searchTerm) {
-        //             $query->where('name', 'like', $searchTerm)
-        //                 ->orWhere('description', 'like', $searchTerm);
-        //         })
-        //         ->orderBy('created_at', 'desc')
-        //         ->paginate(9);
-        // }
-
-        $courses = Course::where('name', 'like', $searchTerm)->orWhere('description', 'like', $searchTerm)
-            ->orderBy('created_at', 'desc')
-            ->paginate(9);
+        if ($user->hasRole('admin')) {
+            $courses = Course::where('name', 'like', $searchTerm)->orWhere('description', 'like', $searchTerm)
+                ->orderBy('created_at', 'desc')
+                ->paginate(9);
+        } else if ($user->hasRole('teacher')) {
+            $courses = $user->courses()
+                ->where(function ($query) use ($searchTerm) {
+                    $query->where('name', 'like', $searchTerm)
+                        ->orWhere('description', 'like', $searchTerm);
+                })
+                ->orderBy('created_at', 'desc')
+                ->paginate(9);
+        }
 
         return view('livewire.course-crud', [
             'courses' => $courses
