@@ -9,6 +9,8 @@ class Attendance extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['lesson_id', 'student_id'];
+
     function students()
     {
         return $this->belongsToMany(Student::class);
