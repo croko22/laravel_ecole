@@ -47,8 +47,8 @@
                             @foreach ($teachers as $teacher)
                                 <li class="flex justify-between py-3 items center">
                                     <div class="flex gap-3 items center">
-                                        <img src="{{ $teacher->profile_photo_url }}" alt="{{ $teacher->name }}"
-                                            class="w-8 h-8 rounded-full">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+                                            alt="{{ $teacher->name }}" class="w-8 h-8 rounded-full">
                                         <div>
                                             <h3 class="text-sm font-medium text-gray-800 dark:text-neutral-200">
                                                 {{ $teacher->name }}
