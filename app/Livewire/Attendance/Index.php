@@ -11,18 +11,18 @@ class Index extends Component
 
     public function mount()
     {
-        $this->attendance = auth()->user()->courses->map(function ($course) {
-            return [
-                'course' => $course,
-                'attendance' => $course->attendance->groupBy('date')
-            ];
-        });
+        // $this->attendance = auth()->user()->courses->map(function ($course) {
+        //     return [
+        //         'course' => $course,
+        //         'attendance' => $course->attendance->groupBy('date')
+        //     ];
+        // });
     }
 
     public function render()
     {
         return view('livewire.attendance.index', [
-            'attendance' => $this->attendance
+            // 'attendance' => $this->attendance
         ]);
     }
 }
