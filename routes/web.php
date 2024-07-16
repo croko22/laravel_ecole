@@ -13,15 +13,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/course', CourseCrud::class)->name('course');
     Route::get('/course/{course}', [CourseController::class, 'show'])->name('course.show');
 
-    Route::group(['middleware' => ['role:admin']], function () {
-        // Route::group(['middleware' => ['can:view course']], function () {
-        Route::get('/student', StudentTable::class)->name('student');
-        Route::get('/teacher', TeacherTable::class)->name('teacher');
-    });
+    // Route::group(['middleware' => ['role:admin']], function () {
+    Route::get('/student', StudentTable::class)->name('student');
+    Route::get('/teacher', TeacherTable::class)->name('teacher');
+    // });
 
-    Route::group(['middleware' => ['role:teacher']], function () {
-        Route::get('/attendance/{course}', AttendanceIndex::class)->name('attendance');
-    });
+    // Route::group(['middleware' => ['role:teacher']], function () {
+    Route::get('/attendance/{course}', AttendanceIndex::class)->name('attendance');
+    // });
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });

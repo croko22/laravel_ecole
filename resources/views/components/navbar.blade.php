@@ -35,7 +35,7 @@
         </div>
 
         <div class="row md:block md:w-auto md:basis-auto md:order-2 md:col-span-6">
-            @auth
+            @hasrole('admin')
                 <div
                     class="flex flex-col mt-5 gap-y-4 gap-x-0 md:flex-row md:justify-center md:items-center md:gap-y-0 md:gap-x-7 md:mt-0">
                     <a class="nav-link {{ request()->routeIs('course') ? 'active' : '' }}" wire:navigate
@@ -45,7 +45,14 @@
                     <a class="nav-link {{ request()->routeIs('teacher') ? 'active' : '' }}" wire:navigate
                         href={{ route('teacher') }}>Teachers</a>
                 </div>
-            @endauth
+            @endhasrole
+            @hasrole('teacher')
+                <div
+                    class="flex flex-col mt-5 gap-y-4 gap-x-0 md:flex-row md:justify-center md:items-center md:gap-y-0 md:gap-x-7 md:mt-0">
+                    <a class="nav-link {{ request()->routeIs('course') ? 'active' : '' }}" wire:navigate
+                        href={{ route('course') }} aria-current="page">Courses</a>
+                </div>
+            @endhasrole
         </div>
     </nav>
 </header>

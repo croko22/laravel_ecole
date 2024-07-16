@@ -13,11 +13,42 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+        Permission::create(['name' => 'create course']);
+        Permission::create(['name' => 'edit course']);
+        Permission::create(['name' => 'delete course']);
+        Permission::create(['name' => 'view course']);
+
+        Permission::create(['name' => 'create student']);
+        Permission::create(['name' => 'edit student']);
+        Permission::create(['name' => 'delete student']);
+        Permission::create(['name' => 'view student']);
+
+        Permission::create(['name' => 'create teacher']);
+        Permission::create(['name' => 'edit teacher']);
+        Permission::create(['name' => 'delete teacher']);
+        Permission::create(['name' => 'view teacher']);
+
+        Permission::create(['name' => 'take attendance']);
+
         $teacherRole = Role::create(['name' => 'teacher']);
-        $teacherRole->givePermissionTo('take attendance');
+        $teacherRole->givePermissionTo(['take attendance']);
 
         $adminRole = Role::create(['name' => 'admin']);
-        $adminRole->givePermissionTo(Permission::all());
+        $adminRole->givePermissionTo([
+            'create course',
+            'edit course',
+            'delete course',
+            'view course',
+            'create student',
+            'edit student',
+            'delete student',
+            'view student',
+            'create teacher',
+            'edit teacher',
+            'delete teacher',
+            'view teacher',
+        ]);
 
         $adminUser = User::factory()->create([
             'name' => 'Admin User',
@@ -33,9 +64,6 @@ class DatabaseSeeder extends Seeder
         $students = Student::factory(30)->create();
         $courses = Course::factory()->createMany(
             [
-                ['name' => 'Course 1', 'description' => 'Description 1'],
-                ['name' => 'Course 2', 'description' => 'Description 2'],
-                ['name' => 'Course 3', 'description' => 'Description 3'],
                 ['name' => 'Java', 'description' => 'Java Programming'],
                 ['name' => 'Python', 'description' => 'Python Programming'],
                 ['name' => 'C++', 'description' => 'C++ Programming'],
@@ -43,6 +71,9 @@ class DatabaseSeeder extends Seeder
                 ['name' => 'PHP', 'description' => 'PHP Programming'],
                 ['name' => 'JavaScript', 'description' => 'JavaScript Programming'],
                 ['name' => 'Ruby', 'description' => 'Ruby Programming'],
+                ['name' => 'Swift', 'description' => 'Swift Programming'],
+                ['name' => 'Kotlin', 'description' => 'Kotlin Programming'],
+                ['name' => 'Go', 'description' => 'Go Programming'],
             ]
         );
 

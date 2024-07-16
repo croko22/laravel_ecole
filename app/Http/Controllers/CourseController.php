@@ -14,11 +14,16 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::select('id', 'name')->orderBy('updated_at', 'desc')->take(10)->get();
-        $teachers = User::role('teacher')->get();
-        $studentsCount = Student::count(); // Count of all students
-        $teachersCount = User::role('teacher')->count(); // Count of all teachers
-        $coursesCount = Course::count(); // Count of all courses
+        if (auth()->user()->hasRole('admin')) {
+            $courses = Course::orderBy('updated_at', 'desc')->take(10)->get();
+        } else {
+            $courses = auth()->user()->courses;
+        }
+
+        $teachers = User::role('teacher')->take(6)->get();
+        $studentsCount = Student::count();
+        $teachersCount = User::role('teacher')->count();
+        $coursesCount = Course::count();
 
         return view('dashboard', compact('courses', 'studentsCount', 'coursesCount', 'teachersCount', 'teachers'));
     }

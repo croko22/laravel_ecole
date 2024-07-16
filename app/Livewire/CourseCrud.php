@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\User;
 use Livewire\Attributes\Layout;
 use Livewire\WithPagination;
 use Livewire\Component;
@@ -24,6 +25,22 @@ class CourseCrud extends Component
     public function render()
     {
         $searchTerm = '%' . $this->query . '%';
+        $user = User::find(auth()->user()->id);
+
+        // if ($user->hasRole('admin')) {
+        //     $courses = Course::where('name', 'like', $searchTerm)->orWhere('description', 'like', $searchTerm)
+        //         ->orderBy('created_at', 'desc')
+        //         ->paginate(9);
+        // } else if ($user->hasRole('teacher')) {
+        //     $courses = $user->courses()
+        //         ->where(function ($query) use ($searchTerm) {
+        //             $query->where('name', 'like', $searchTerm)
+        //                 ->orWhere('description', 'like', $searchTerm);
+        //         })
+        //         ->orderBy('created_at', 'desc')
+        //         ->paginate(9);
+        // }
+
         $courses = Course::where('name', 'like', $searchTerm)->orWhere('description', 'like', $searchTerm)
             ->orderBy('created_at', 'desc')
             ->paginate(9);
@@ -52,7 +69,7 @@ class CourseCrud extends Component
 
     public function deleteCourse(int $courseId)
     {
-        Course::find($courseId)->delete();
+        Course::destroy($courseId);
         $this->dispatch('course-deleted', ['message' => 'Course deleted successfully!'])->self();
         // $this->courses = Course::all();
     }
