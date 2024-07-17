@@ -5,8 +5,7 @@
             alt="Course image" />
 
         <h5 class="course-card__title">{{ $course->name }}</h5>
-        <p class="course-card__description">{{ $course->description }}</p>
-
+        <p class="course-card__description">Teacher: {{ $course->teachers->first()->name ?? 'No teacher' }}</p>
         <div class="course-card__view-link">
             {{-- MODAL --}}
             <button data-modal-target="modal-{{ $course->id }}" data-modal-toggle="modal-{{ $course->id }}"
@@ -37,7 +36,7 @@
                     <!-- Modal body -->
                     <div class="p-4 space-y-4 md:p-5">
                         <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                            {{ $course->description }}
+                            {!! $course->description !!}
                         </p>
                         {{-- TEACHER --}}
                         <h3 class="mb-2 text-lg font-semibold">Teachers</h3>
