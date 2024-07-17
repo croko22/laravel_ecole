@@ -1,21 +1,22 @@
 <div>
-    <x-toast event="course-updated" message="Course updated successfully!" />
-
     @cannot('edit course')
         <h1 class="text-6xl font-extrabold dark:text-white">Course: <small
                 class="font-semibold text-gray-500 ms-2 dark:text-gray-400">{{ $course->name }}</small></h1>
         <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">{{ $course->description }}</p>
     @endcannot
+
     @can('edit course')
+        <x-toast event="course-updated" message="Course updated successfully!" />
+        <div class="absolute flex items-center justify-center p-0">
+            <p class="text-yellow-500" wire:dirty>You have unsaved changes!</p>
+        </div>
+
         <form class="mt-4" wire:submit.prevent="update">
-            <input placeholder="Static" wire:model="name"
-                class="text-2xl font-bold peer h-full w-full border-b border-gray-900 bg-transparent pt-4 pb-1.5 font-sans text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" />
-
-            <textarea class="block w-full mt-4 form-textarea" wire:model="description" rows="3">{{ $course->description }}</textarea>
-            <div>
-                <p class="text-yellow-500" wire:dirty>You have unsaved changes!</p>
+            <div class="flex items-center justify-between gap-3">
+                <input placeholder="Static" wire:model="name" class="input-title peer" />
+                <button class="mt-4 button-primary" type="submit">Save</button>
             </div>
-
+            <x-tinymce wire:model="description" x-ref="description" :description="$course->description" />
             <h2 class="mt-4 text-xl font-bold">Teacher</h2>
 
             <label for="teacher" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -31,7 +32,6 @@
                 @endforeach
             </select>
 
-            <button class="mt-4 button-primary" wire:click="update">Save</button>
         </form>
     @endcan
 
@@ -41,17 +41,23 @@
         <label for="newStudent" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
             Add a Student
         </label>
-        <select id="newStudent" name="newStudent" wire:model="selectedNewStudent"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-4">
-            <option selected value="">Select a student to add</option>
-            @foreach ($students as $student)
-                @if (!$course->students->contains($student))
-                    <option value="{{ $student->id }}">{{ $student->name }}, {{ $student->lastname }}</option>
-                @endif
-            @endforeach
-        </select>
-        <button class="mt-4 button-primary" wire:click="addStudent">Add Student</button>
-
+        <div class="flex items-center justify-between gap-3">
+            <select id="newStudent" name="newStudent" wire:model="selectedNewStudent"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option selected value="">Select a student to add</option>
+                @foreach ($students as $student)
+                    @if (!$course->students->contains($student))
+                        <option value="{{ $student->id }}">{{ $student->name }}, {{ $student->lastname }}</option>
+                    @endif
+                @endforeach
+            </select>
+            <button class="button-primary" wire:click="addStudent"> <svg class="flex-shrink-0 size-4"
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14" />
+                    <path d="M12 5v14" />
+                </svg></button>
+        </div>
         <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
             @foreach ($course->students as $student)
                 <li>
