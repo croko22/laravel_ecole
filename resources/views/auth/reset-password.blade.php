@@ -1,4 +1,4 @@
-<x-layout>
+<x-layouts.layout>
 
     <h1>Reset your password</h1>
 
@@ -29,4 +29,4 @@
 
         <button type="submit" class="button-primary">Submit</button>
     </form>
-</x-layout>
+</x-layouts.layout>

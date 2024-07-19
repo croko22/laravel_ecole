@@ -1,4 +1,4 @@
-<x-layout>
+<x-layouts.layout>
     <!-- Hero -->
     <div class="relative">
         <!-- Gradients -->
@@ -49,4 +49,4 @@
         </div>
     </div>
     <!-- End Hero -->
-</x-layout>
+</x-layouts.layout>

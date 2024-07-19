@@ -1,7 +1,6 @@
-<x-layout>
-    <h1>Dashboard</h1>
-
+<x-layouts.layout>
     <div class="w-screen max-w-screen-xl">
+        <h1>Dashboard</h1>
         <div class="p-4 space-y-4 sm:p-6 sm:space-y-6">
             <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 sm:gap-6">
                 <x-dashboard.header-card label="Welcome" :value="auth()->user()->name" />
@@ -66,4 +65,4 @@
             </div>
         </div>
     </div>
-</x-layout>
+</x-layouts.layout>

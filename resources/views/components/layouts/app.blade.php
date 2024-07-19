@@ -13,7 +13,7 @@
 <body>
     <div x-init="initFlowbite();"></div>
     <div class="app-container">
-        <x-navbar />
+        <x-layouts.navbar />
         {{ $slot }}
     </div>
 </body>

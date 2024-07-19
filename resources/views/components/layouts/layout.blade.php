@@ -12,7 +12,7 @@
 
 <body>
     <div class="app-container">
-        <x-navbar />
+        <x-layouts.navbar />
         <!-- Page Content -->
         <main>
             {{ $slot }}

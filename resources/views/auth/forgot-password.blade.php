@@ -1,4 +1,4 @@
-<x-layout>
+<x-layouts.layout>
 
     <h1>Enter your email</h1>
 
@@ -14,4 +14,4 @@
         </div>
         <button type="submit" class="button-primary">Submit</button>
     </form>
-</x-layout>
+</x-layouts.layout>

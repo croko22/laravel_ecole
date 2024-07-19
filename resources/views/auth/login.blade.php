@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-layouts.guest-layout>
     @if (session('error'))
         <div class="absolute top-10 left-10 ">
             <x-error />
@@ -33,4 +33,4 @@
         <button type="submit" class="button-primary">Submit</button>
     </form>
 
-</x-guest-layout>
+</x-layouts.guest-layout>
