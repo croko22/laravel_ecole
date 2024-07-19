@@ -44,7 +44,7 @@ class TeacherTable extends Component
         User::destroy($this->selectedRows);
         $this->selectedRows = [];
 
-        $this->dispatch('user-deleted', ['message' => 'Teachers deleted successfully!']);
+        $this->dispatch('teacher-deleted', ['message' => 'Teachers deleted successfully!']);
     }
 
     public function createTeacher()
@@ -62,8 +62,7 @@ class TeacherTable extends Component
         $teacher->assignRole('teacher');
 
         $this->reset();
-        $this->dispatch('user-added', ['message' => 'Teacher added successfully!']);
-        // $this->resetPage();
+        $this->dispatch('teacher-added', ['message' => 'Teacher added successfully!']);
     }
 
 }

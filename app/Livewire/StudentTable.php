@@ -4,25 +4,30 @@ namespace App\Livewire;
 
 use App\Models\Student;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\On;
 
 #[Layout('components.layouts.app')]
+
+#[On('student-added')]
 class StudentTable extends Component
 {
     use WithPagination;
 
-    public $selectedRows = [];
     public $query = '';
+    public $selectedRows = [];
+
+    #[Validate('required')]
+    public $name;
+    public $lastname;
 
     public function search()
     {
         $this->resetPage();
     }
 
-    #[On('student-added')]
-    #[On('student-deleted')]
     public function render()
     {
         $students = Student::orderBy('updated_at', 'desc')->
@@ -43,10 +48,6 @@ class StudentTable extends Component
         $this->dispatch('student-deleted', ['message' => 'Students deleted successfully!']);
     }
 
-
-    public $name;
-    public $lastname;
-
     public function createStudent()
     {
         $this->validate([
@@ -61,6 +62,5 @@ class StudentTable extends Component
 
         $this->reset();
         $this->dispatch('student-added', ['message' => 'Student added successfully!']);
-        // $this->resetPage();
     }
 }

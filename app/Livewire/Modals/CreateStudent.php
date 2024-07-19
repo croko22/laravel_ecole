@@ -3,32 +3,38 @@
 namespace App\Livewire\Modals;
 
 use App\Models\Student;
+use Livewire\Attributes\On;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class CreateStudent extends Component
 {
-    // public $name;
-    // public $lastname;
 
-    // public function createStudent()
-    // {
-    //     $this->validate([
-    //         'name' => 'required',
-    //         'lastname' => 'required',
-    //     ]);
+    #[Validate('required')]
+    public $name;
 
-    //     Student::create([
-    //         'name' => $this->name,
-    //         'lastname' => $this->lastname,
-    //     ]);
-
-    //     $this->reset();
-    // }
+    #[Validate('required')]
+    public $lastname;
+    public $modalOpen = false;
 
 
+    #[On('student-added')]
+    public function closeModal()
+    {
+        $this->modalOpen = false;
+    }
 
     public function render()
     {
         return view('livewire.modals.create-student');
+    }
+
+    public function createStudent()
+    {
+        $this->validate();
+        Student::create($this->pull());
+
+        $this->reset();
+        $this->dispatch('student-added', ['message' => 'Student created successfully!']);
     }
 }
