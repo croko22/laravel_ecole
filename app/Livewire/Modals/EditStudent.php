@@ -2,14 +2,26 @@
 
 namespace App\Livewire\Modals;
 
+use Livewire\Attributes\On;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 
 class EditStudent extends Component
 {
+
     public $student;
+    #[Validate('required')]
     public $name;
+    #[Validate('required')]
     public $lastname;
+    public $modalOpen = false;
+
+    #[On('student-updated')]
+    public function closeModal()
+    {
+        $this->modalOpen = false;
+    }
 
     public function mount($student)
     {
@@ -19,24 +31,13 @@ class EditStudent extends Component
     }
     public function render()
     {
-        return view('livewire.modals.edit-student', [
-            'student' => $this->student
-
-        ]);
+        return view('livewire.modals.edit-student');
     }
 
     public function updateStudent()
     {
-        $this->validate([
-            'name' => 'required',
-            'lastname' => 'required',
-        ]);
-
-        $this->student->update([
-            'name' => $this->name,
-            'lastname' => $this->lastname,
-        ]);
-
-        $this->dispatchBrowserEvent('student-updated', ['message' => 'Student updated successfully!']);
+        $this->validate();
+        $this->student->update($this->pull());
+        $this->dispatch('student-updated', ['message' => 'Student updated successfully!']);
     }
 }

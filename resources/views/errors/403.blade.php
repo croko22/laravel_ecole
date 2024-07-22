@@ -1,4 +1,4 @@
-<x-layout>
+<x-layouts.layout>
 
     <section>
         <div class="px-8 py-24 mx-auto md:px-12 lg:px-32 max-w-7xl">
@@ -21,4 +21,4 @@
         </div>
     </section>
 
-</x-layout>
+</x-layouts.layout>
