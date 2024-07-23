@@ -6,7 +6,6 @@ use App\Models\Lesson;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-#[On("lesson-created"), On("lesson-deleted")]
 class Index extends Component
 {
     public $course;
@@ -22,6 +21,7 @@ class Index extends Component
         $this->lessons = $course->lessons->sortBy('date');
     }
 
+    #[On("lesson-created")]
     public function render()
     {
         return view('livewire.attendance.index', [

@@ -43,5 +43,6 @@ class TakeAttendance extends Component
         } elseif (!$isChecked && $attendance) {
             $attendance->delete();
         }
+        $this->dispatch('attendance-updated', ['message' => 'Attendance updated successfully!']);
     }
 }
