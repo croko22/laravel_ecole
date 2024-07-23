@@ -231,5 +231,6 @@
                 @endforelse
             </tbody>
         </table>
+        {{ $lessons->links() }}
     </div>
 </div>

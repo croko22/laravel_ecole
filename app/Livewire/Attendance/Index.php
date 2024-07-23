@@ -2,14 +2,16 @@
 
 namespace App\Livewire\Attendance;
 
+use App\Models\Course;
 use App\Models\Lesson;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
+    use WithPagination;
     public $course;
-    public $lessons;
     public $date = null;
     public $time = "9:00";
     public $modalOpen = false;
@@ -18,14 +20,13 @@ class Index extends Component
     public function mount($course)
     {
         $this->course = $course;
-        $this->lessons = $course->lessons->sortBy('date');
     }
 
     #[On("lesson-created")]
     public function render()
     {
         return view('livewire.attendance.index', [
-            'lessons' => $this->lessons,
+            'lessons' => Course::find($this->course->id)->lessons()->paginate(11),
         ]);
     }
 

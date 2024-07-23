@@ -75,6 +75,6 @@
     @endcan
 
     @can('take attendance')
-        <livewire:attendance :course="$course" :lessons="$course->lessons" />
+        <livewire:attendance :lessons="$course->lessons" :course="$course" />
     @endcan
 </div>
