@@ -10,11 +10,11 @@ use Livewire\Component;
 class Show extends Component
 {
     public Course $course;
-    public $teachers;
-    public $students;
     public $name;
     public $description;
+    public $teachers;
     public $selectedTeacher;
+    public $students;
     public $selectedNewStudent;
 
     public function mount(Course $course)
