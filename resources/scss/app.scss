@@ -7,11 +7,12 @@
 }
 
 h1 {
-    @apply text-2xl font-bold;
+    @apply text-4xl font-bold;
 }
 h2 {
     @apply text-2xl font-semibold text-gray-900 dark:text-white;
 }
+
 .link {
     @apply font-medium text-blue-600 dark:text-blue-500 hover:underline;
 }
@@ -48,10 +49,6 @@ h2 {
 
 .pill {
     @apply bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300;
-}
-
-.invalid-feedback {
-    @apply text-red-500;
 }
 
 //* NAVIGATION
@@ -110,11 +107,10 @@ h2 {
     }
 
     &__view-link {
-        @apply flex items-center justify-center text-blue-600 dark:text-blue-500 hover:underline;
+        @apply flex items-center justify-center my-3;
     }
 
     &__stats {
-        // Assuming you add a class for the div containing the svg and student count
         @apply bottom-0 left-0 flex justify-center w-full mt-2 leading-none text-center;
     }
 
