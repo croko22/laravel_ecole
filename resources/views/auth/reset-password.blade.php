@@ -1,6 +1,6 @@
 <x-layouts.layout>
 
-    <h1>Reset your password</h1>
+    <h1 class="mb-5">Reset your password</h1>
 
     <form class="max-w-sm mx-auto" action="{{ route('password.update', ['token' => $token]) }}" method="POST">
         @csrf

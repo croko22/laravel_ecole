@@ -26,7 +26,7 @@
             </span>
         </a>
         <!-- End Logo -->
-        <main>
+        <main class="max-w-lg p-10 mx-auto mt-10 bg-white rounded-lg shadow-md dark:bg-gray-800">
             {{ $slot }}
         </main>
     </div>
