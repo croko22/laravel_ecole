@@ -16,7 +16,7 @@
                 <input placeholder="Static" wire:model="name" class="input-title peer" />
                 <button class="mt-4 button-primary" type="submit">Save</button>
             </div>
-            <x-tinymce wire:model="description" x-ref="description" :description="$course->description" />
+            <x-tinymce />
             <h2 class="mt-4 text-xl font-bold">Teacher</h2>
 
             <label for="teacher" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">

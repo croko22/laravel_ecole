@@ -50,7 +50,8 @@
 
                             <div class="form-group">
                                 <label for="description" class="label">Course Description:</label>
-                                <x-tinymce wire:model="description" x-ref="description" :description="$description" />
+                                {{-- <x-tinymce wire:model="description" x-ref="description" :description="$description" /> --}}
+                                <x-tinymce />
                                 @error('description')
                                     <span class="invalid-feedback">{{ $description }}</span>
                                 @enderror
