@@ -19,19 +19,18 @@ Alpine.data("tinymceEditor", (entangle) => ({
     editor: null,
     init() {
         tinymce.init({
+            menubar: true,
             toolbar:
-                "undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat",
-            menubar: false, // Set to true if you want to show the menubar
-            plugins:
-                "lists link image charmap print preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste code help wordcount",
+                "undo redo | blocks | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat",
 
-            selector: "textarea",
-            allow_conditional_comments: true,
-            target: this.$refs.tinymce,
-
+            content_css: "/app.css",
             skin: false,
-            content_css: false,
+            style_formats: [
+                { title: "My heading", block: "h1", classes: "heading" },
+                { title: "PEPE", block: "p", classes: "pepe" },
+            ],
 
+            target: this.$refs.tinymce,
             setup: (editor) => {
                 editor.on("blur", (e) => {
                     this.value = editor.getContent();
@@ -47,7 +46,6 @@ Alpine.data("tinymceEditor", (entangle) => ({
             },
         });
 
-        // Or, this.editor = tinymce.get(this.$refs.tinymce.id)
         if (this.editor) {
             this.$watch("value", (newValue) => {
                 if (newValue !== this.editor.getContent()) {
