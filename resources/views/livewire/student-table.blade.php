@@ -19,7 +19,7 @@
                             </p>
                         </div>
 
-                        <x-search :query="$query" />
+                        <x-search :query="$query" placeholder="Search students..." />
 
                         <div>
                             <div class="inline-flex gap-x-2">

@@ -8,7 +8,7 @@
             <livewire:modals.create-course />
         @endcan
 
-        <x-search :query="$query" />
+        <x-search :query="$query" placeholder="Search courses..." />
     </div>
 
     <section class="mt-5 text-gray-600 body-font">
