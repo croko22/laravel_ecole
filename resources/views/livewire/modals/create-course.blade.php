@@ -42,7 +42,7 @@
                         <form wire:submit.prevent="createCourse">
                             <div class="form-group">
                                 <label for="name" class="label">Course Name:</label>
-                                <input wire:model="name" type="text" class="input" id="name">
+                                <input wire:model="name" type="text" class="input" id="name" required>
                                 @error('name')
                                     <span class="invalid-feedback">{{ $description }}</span>
                                 @enderror
@@ -51,7 +51,7 @@
                             <div class="form-group">
                                 <label for="description" class="label">Course Description:</label>
                                 {{-- <x-tinymce wire:model="description" x-ref="description" :description="$description" /> --}}
-                                <x-tinymce />
+                                <x-tinymce wire:model="description" />
                                 @error('description')
                                     <span class="invalid-feedback">{{ $description }}</span>
                                 @enderror
