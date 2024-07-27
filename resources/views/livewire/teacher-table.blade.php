@@ -19,8 +19,7 @@
                             </p>
                         </div>
 
-                        <x-search :query="$query" />
-
+                        <x-search :query="$query" placeholder="Search teachers..." />
 
                         <div>
                             <div class="inline-flex gap-x-2">
@@ -47,12 +46,6 @@
         <thead class="bg-gray-50 dark:bg-neutral-800">
             <tr>
                 <th scope="col" class="py-3 ps-6 text-start">
-                    <label for="hs-at-with-checkboxes-main" class="flex">
-                        <input type="checkbox"
-                            class="text-blue-600 border-gray-300 rounded shrink-0 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                            id="hs-at-with-checkboxes-main">
-                        <span class="sr-only">Checkbox</span>
-                    </label>
                 </th>
 
                 <th scope="col" class="w-32 py-3 ps-6 lg:ps-3 xl:ps-0 pe-6 text-start">

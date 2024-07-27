@@ -57,7 +57,7 @@
 
     <td class="size-px whitespace-nowrap">
         <div class="px-6 py-1.5">
-            {{-- <livewire:modals.edit-user :user="$user" /> --}}
+            <livewire:modals.edit-user :user="$teacher" />
         </div>
     </td>
 </tr>

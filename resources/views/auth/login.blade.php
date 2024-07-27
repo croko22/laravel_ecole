@@ -5,7 +5,7 @@
         </div>
     @endif
 
-    <h2>Login</h2>
+    <h2 class="text-center">Login</h2>
     <form action="{{ route('login') }}" method="POST" class="mt-6">
         @csrf
         <div class="mb-5">

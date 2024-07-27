@@ -26,7 +26,7 @@ class TeacherTable extends Component
 
     public function render()
     {
-        $teachers = User::role('teacher')
+        $teachers = User::role(['teacher', 'admin'])
             ->where(function ($query) {
                 $query->where('name', 'like', '%' . $this->query . '%')
                     ->orWhere('email', 'like', '%' . $this->query . '%');
