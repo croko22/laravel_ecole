@@ -6,7 +6,6 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
-
 class EditStudent extends Component
 {
 

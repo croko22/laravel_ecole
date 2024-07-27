@@ -2,8 +2,10 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\On;
 use Livewire\Component;
 
+#[On('user-updated')]
 class TeacherRow extends Component
 {
     public $teacher;

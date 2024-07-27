@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
+#[On("student-updated")]
 class StudentRow extends Component
 {
     public $student;
