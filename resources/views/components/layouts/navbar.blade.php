@@ -43,7 +43,7 @@
                     <a class="nav-link {{ request()->routeIs('student') ? 'active' : '' }}" wire:navigate
                         href={{ route('student') }}>Students</a>
                     <a class="nav-link {{ request()->routeIs('teacher') ? 'active' : '' }}" wire:navigate
-                        href={{ route('teacher') }}>Teachers</a>
+                        href={{ route('teacher') }}>Users</a>
                 </div>
             @endhasrole
             @hasrole('teacher')

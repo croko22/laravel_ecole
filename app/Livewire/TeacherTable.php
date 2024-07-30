@@ -23,7 +23,6 @@ class TeacherTable extends Component
         $this->resetPage();
     }
 
-
     public function render()
     {
         $teachers = User::role(['teacher', 'admin'])
