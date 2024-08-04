@@ -20,8 +20,12 @@
                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
-                <div class="flex items-center justify-between space-x-4">
-                    <h1 class="text-xl font-medium text-gray-800 ">Take attendance</h1>
+                <div class="flex items-center justify-between mb-5 space-x-4">
+                    <h1 class="text-xl font-medium text-gray-800 ">{{ $course->name }} - Take attendance</h1>
+                    <p>
+                        <span class="text-sm font-medium text-gray-500 dark:text-gray-400">Lesson:</span>
+                        <span class="text-sm font-medium text-gray-900 dark:text-white">{{ $lesson->date }}</span>
+                    </p>
 
                     <button @click="modalOpen = false" class="text-gray-600 focus:outline-none hover:text-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
@@ -33,7 +37,7 @@
                 </div>
 
                 <ul class="max-w-lg divide-y divide-gray-200 dark:divide-gray-700">
-                    @forelse ($course->students as $student)
+                    @forelse ($course->students->sortBy('lastname') as $student)
                         <li class="pb-3 sm:pb-4">
                             <div class="flex items-center justify-between space-x-4 rtl:space-x-reverse">
                                 <div class="flex-shrink-0">
