@@ -1,6 +1,5 @@
 <div x-data="{ modalOpen: $wire.entangle('modalOpen') }">
-    <button @click="modalOpen =!modalOpen"
-        class="inline-flex items-center text-sm font-medium text-blue-600 gap-x-1 decoration-2 hover:underline dark:text-blue-500">
+    <button @click="modalOpen =!modalOpen" class="link">
         Take attendance
     </button>
 
@@ -18,8 +17,7 @@
                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
                 x-transition:leave="transition ease-in duration-200 transform"
                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
+                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="modal">
                 <div class="flex items-center justify-between mb-5 space-x-4">
                     <h1 class="text-xl font-medium text-gray-800 ">{{ $course->name }} - Take attendance</h1>
                     <p>

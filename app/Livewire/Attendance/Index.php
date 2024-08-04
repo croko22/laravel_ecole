@@ -26,7 +26,7 @@ class Index extends Component
     public function render()
     {
         return view('livewire.attendance.index', [
-            'lessons' => Course::find($this->course->id)->lessons()->paginate(11),
+            'lessons' => Course::find($this->course->id)->lessons()->orderBy('date', 'desc')->paginate(11)
         ]);
     }
 
