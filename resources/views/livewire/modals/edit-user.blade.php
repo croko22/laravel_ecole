@@ -54,9 +54,9 @@
                     </div>
 
                     <div class="flex flex-row space-x-2">
-                        <label class="inline-flex items-center gap-3 cursor-pointer">
+                        <label class="inline-flex items-center gap-3 py-5 cursor-pointer">
                             {{-- Role Switcher --}}
-                            <span class="text-sm font-medium text-gray-900 ms-3 dark:text-gray-300">
+                            <span class="text-sm font-medium text-gray-900 dark:text-gray-300">
                                 Admin
                             </span>
                             <input type="checkbox" {{ $role === 'admin' ? 'checked' : '' }} wire:click="toggleRole()"
