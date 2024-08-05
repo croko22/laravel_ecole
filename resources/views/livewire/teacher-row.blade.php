@@ -1,10 +1,15 @@
 <tr class="{{ $teacher->id === auth()->id() ? 'bg-blue-100 dark:bg-blue-700' : '' }}">
     <td class="size-px whitespace-nowrap">
         <div class="py-3 ps-6">
-            <label for="hs-at-with-checkboxes-1" class="flex">
-                <input type="checkbox" wire:model="$parent.selectedRows" value="{{ $teacher->id }}" class="input-checkbox">
-                <span class="sr-only">Checkbox</span>
-            </label>
+            @if ($teacher->id === auth()->id())
+                <span class="text-xs text-gray-500 dark:text-neutral-500">You</span>
+            @else
+                <label for="hs-at-with-checkboxes-1" class="flex">
+                    <input type="checkbox" wire:model="$parent.selectedRows" value="{{ $teacher->id }}"
+                        class="input-checkbox" {{ $teacher->id === auth()->id() ? 'disabled' : '' }}>
+                    <span class="sr-only">Checkbox</span>
+                </label>
+            @endif
         </div>
     </td>
     <td class="size-px whitespace-nowrap">
