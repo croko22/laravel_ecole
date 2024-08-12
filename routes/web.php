@@ -3,6 +3,7 @@
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\AuthController;
 use App\Livewire\CourseCrud;
+use App\Livewire\EditUser;
 use App\Livewire\StudentTable;
 use App\Livewire\TeacherTable;
 use App\Livewire\Course\Show as CourseShow;
@@ -10,6 +11,7 @@ use App\Livewire\Attendance\Index as AttendanceIndex;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [CourseController::class, 'index'])->name('dashboard');
+    Route::get('/user', EditUser::class)->name('profile');
 
     Route::get('/course', CourseCrud::class)->name('course');
     Route::get('/course/{course}', CourseShow::class)->name('course.show');
