@@ -9,7 +9,7 @@ class Lesson extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['date'];
+    protected $fillable = ['date', 'course_id'];
 
     public function course()
     {
@@ -23,6 +23,6 @@ class Lesson extends Model
 
     public function attendanceCount()
     {
-        return $this->attendance->count();
+        return $this->attendance()->count();
     }
 }

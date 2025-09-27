@@ -15,34 +15,37 @@ class TakeAttendance extends Component
     public function mount($lesson)
     {
         $this->lesson = $lesson;
-
-        $this->attendance = $lesson->attendance;
-
+        // Load attendance with students to avoid N+1 queries
+        $this->lesson->load('attendance.student');
     }
     public function render()
     {
         return view('livewire.modals.take-attendance', [
             'course' => $this->lesson->course,
             'students' => $this->lesson->course->students,
-            'attendance' => $this->attendance,
+            'attendance' => $this->lesson->attendance,
         ]);
     }
 
 
     public function updateAttendance($studentId, $isChecked)
     {
-        $attendance = Attendance::where('lesson_id', $this->lesson->id)
-            ->where('student_id', $studentId)
-            ->first();
+        // Use firstOrNew to avoid duplicate queries
+        $attendance = Attendance::firstOrNew([
+            'lesson_id' => $this->lesson->id,
+            'student_id' => $studentId,
+        ]);
 
-        if ($isChecked && !$attendance) {
-            Attendance::create([
-                'lesson_id' => (int) $this->lesson->id,
-                'student_id' => (int) $studentId,
-            ]);
-        } elseif (!$isChecked && $attendance) {
-            $attendance->delete();
+        if ($isChecked) {
+            if (!$attendance->exists) {
+                $attendance->save();
+            }
+        } else {
+            if ($attendance->exists) {
+                $attendance->delete();
+            }
         }
+
         $this->dispatch('attendance-updated', ['message' => 'Attendance updated successfully!']);
     }
 }

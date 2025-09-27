@@ -11,8 +11,13 @@ class Attendance extends Model
 
     protected $fillable = ['lesson_id', 'student_id'];
 
-    function students()
+    public function student()
     {
-        return $this->belongsToMany(Student::class);
+        return $this->belongsTo(Student::class);
+    }
+
+    public function lesson()
+    {
+        return $this->belongsTo(Lesson::class);
     }
 }

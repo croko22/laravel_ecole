@@ -17,6 +17,11 @@ class Index extends Component
     public $modalOpen = false;
     public $selectedRows = [];
 
+    protected $rules = [
+        'date' => 'required|date',
+        'time' => 'required|date_format:H:i',
+    ];
+
     public function mount($course)
     {
         $this->course = $course;
@@ -26,30 +31,41 @@ class Index extends Component
     public function render()
     {
         return view('livewire.attendance.index', [
-            'lessons' => Course::find($this->course->id)->lessons()->orderBy('date', 'desc')->paginate(11)
+            'lessons' => $this->course->lessons()->orderBy('date', 'desc')->paginate(11)
         ]);
     }
 
     public function createLesson()
     {
-        $specificDate = $this->date . ' ' . $this->time;
-        $this->course->lessons()->create([
-            'date' => $specificDate,
-        ]);
+        $this->validate();
 
-        $this->dispatch('lesson-created', ['message' => 'Lesson created successfully!']);
-        $this->modalOpen = false;
-        // $this->reset();
+        try {
+            $specificDate = $this->date . ' ' . $this->time;
+            $this->course->lessons()->create([
+                'date' => $specificDate,
+            ]);
+
+            $this->dispatch('lesson-created', ['message' => 'Lesson created successfully!']);
+            $this->modalOpen = false;
+            $this->reset(['date', 'time']);
+        } catch (\Exception $e) {
+            $this->dispatch('error', ['message' => 'Failed to create lesson: ' . $e->getMessage()]);
+        }
     }
 
     public function deleteMarked()
     {
         if (empty($this->selectedRows)) {
+            $this->dispatch('warning', ['message' => 'No lessons selected for deletion.']);
             return;
         }
-        Lesson::destroy($this->selectedRows);
-        $this->selectedRows = [];
 
-        $this->dispatch('lesson-deleted', ['message' => 'Lessons deleted successfully!']);
+        try {
+            Lesson::destroy($this->selectedRows);
+            $this->selectedRows = [];
+            $this->dispatch('lesson-deleted', ['message' => 'Lessons deleted successfully!']);
+        } catch (\Exception $e) {
+            $this->dispatch('error', ['message' => 'Failed to delete lessons: ' . $e->getMessage()]);
+        }
     }
 }
