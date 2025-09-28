@@ -34,7 +34,7 @@ COPY /artisan artisan
 COPY . /var/www/html
 # COPY /composer.json composer.json
 
-RUN composer install --prefer-dist --no-ansi --no-dev --no-autoloader
+RUN composer install --prefer-dist --no-ansi --no-autoloader
 
 COPY /bootstrap bootstrap
 COPY /app app
@@ -48,4 +48,6 @@ RUN composer dump-autoload -o
 
 FROM build-fpm AS fpm
 
-COPY --from=build-fpm /var/www/html /var/www/html
+COPY --chown=www-data:www-data --from=build-fpm /var/www/html /var/www/html
+
+USER www-data
