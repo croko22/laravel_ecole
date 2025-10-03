@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: load-generator
+spec:
+  containers:
+    - name: loader
+      image: busybox
+      args:
+        [
+          /bin/sh,
+          -c,
+          "while true; do wget -q -O- http://web-application-svc; done",
+        ]

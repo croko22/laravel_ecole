@@ -44,22 +44,14 @@ spec:
             - "artisan"
             - "migrate"
             - "--force"
-        - name: database-seeder
-          image: backend:latest
-          imagePullPolicy: Never
-          command: ["php"]
-          args: ["artisan", "db:seed", "--force"]
-          envFrom:
-            - configMapRef:
-                name: application-config
-            - secretRef:
-                name: application-secret
       containers:
         - name: nginx
           imagePullPolicy: Never
           image: frontend:latest
           resources:
-            {}
+            requests:
+              cpu: "200m"
+              # memory: 32M
             # limits:
             #   cpu: 500m
             #   memory: 50M
@@ -86,7 +78,9 @@ spec:
               mountPath: /var/www/html/bootstrap/cache
             - name: sessions
               mountPath: /var/www/html/storage/framework/sessions
-          resources: {}
+          resources:
+            requests:
+              cpu: "200m"
           image: backend:latest
           ports:
             - containerPort: 9000
