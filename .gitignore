@@ -19,8 +19,7 @@ yarn-error.log
 /.idea
 /.vscode
 
-# Lock files
-composer.lock
+# Lock files - NO ignores composer.lock! It's needed for consistent builds
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
@@ -28,4 +27,5 @@ pnpm-lock.yaml
 # Infrastructure
 /infra/kubeconfig.yaml
 /infra/node_modules
+/infra/.pulumi
 /infra/.pulumi
