@@ -25,6 +25,16 @@ COPY /bootstrap bootstrap
 COPY /config config
 COPY /artisan artisan
 
+FROM node:18-alpine AS build-assets
+
+WORKDIR /app
+
+COPY package.json ./
+RUN npm install
+
+COPY . .
+RUN npm run build
+
 FROM base AS build-fpm
 
 WORKDIR /var/www/html
@@ -45,6 +55,9 @@ COPY /routes routes
 # COPY . /var/www/html
 
 RUN composer dump-autoload -o
+
+# Copy built assets from node stage
+COPY --from=build-assets /app/public/build /var/www/html/public/build
 
 FROM build-fpm AS fpm
 
