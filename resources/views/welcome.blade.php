@@ -19,7 +19,7 @@
                     <div class="max-w-2xl mt-5">
                         <h1
                             class="block text-4xl font-semibold text-gray-800 md:text-5xl lg:text-6xl dark:text-neutral-200">
-                            Manage your classes with ease
+                            Cloud Computing
                         </h1>
                     </div>
                     <!-- End Title -->
