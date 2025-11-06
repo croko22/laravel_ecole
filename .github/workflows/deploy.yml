@@ -22,8 +22,19 @@ jobs:
           php-version: "8.2"
           extensions: mbstring, xml, pdo, pdo_mysql, redis, gd, zip
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Install NPM dependencies
+        run: npm install
+
+      - name: Build frontend assets
+        run: npm run build
 
       - name: Copy .env file
         run: cp .env.example .env
